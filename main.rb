@@ -70,6 +70,15 @@ def get_connection
 	@db_connection
 end
 
+def updateDb(hand, score, user)
+	db = get_connection
+	coll = db['test']
+	coll.insert({
+		"hand" => hand,
+		"score" => score,
+		"user" => user
+	})
+end
 get '/' do
 	message = params[:Body]
 	if message == "DEAL"
@@ -78,6 +87,7 @@ get '/' do
 		@@hand = Array.new	
 		deal(2)
 		checkScore()
+		updateDb(@@hand, @@score, params[:From])
 		twiml = Twilio::TwiML::Response.new do |r|
 			r.Message "Hand: #{@@hand} Score: #{@@score}"
 		end 
