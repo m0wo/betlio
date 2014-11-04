@@ -48,16 +48,33 @@ def deal(numCards)
 	end
 end
 
-#deal(2)
-#puts @@hand
+deal(2)
+puts @@hand
+@@score = 0
 
+def checkScore()
+	@@hand.each do |i|
+		currentCard = i
+		currentValue = currentCard[0]
+
+		if currentValue === "T" || currentValue === "J" || currentValue === "Q" || currentValue === "K"
+			@@score = @@score + 10
+		elsif currentValue === "A"
+			@@score = @@score + 11
+		else
+			@@score = @@score + currentValue.to_i
+		end
+	end
+puts @@score
+end
+checkScore();
 
 get '/' do
 	message = params[:Body]
 	if message == "DEAL"
 		deal(2)
 		twiml = Twilio::TwiML::Response.new do |r|
-			r.Message "#{@@hand}"
+			r.Message "Hand: #{@@hand} Score: #{@@score}"
 		end 
 	end
 #	twiml = Twilio::TwiML::Response.new do |r|
