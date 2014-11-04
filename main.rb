@@ -70,12 +70,11 @@ end
 #checkScore();
 
 get '/' do
-	buildDeck()
-	deal(2)
-	checkScore()
 	message = params[:Body]
 	if message == "DEAL"
+		buildDeck()
 		deal(2)
+		checkScore()
 		twiml = Twilio::TwiML::Response.new do |r|
 			r.Message "Hand: #{@@hand} Score: #{@@score}"
 		end 
