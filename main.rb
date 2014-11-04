@@ -89,7 +89,7 @@ get '/' do
 		@@hand = Array.new	
 		deal(2)
 		checkScore()
-		updateDb(@@hand, @@score, "testUser")
+		updateDb(@@hand, @@score, user)
 		twiml = Twilio::TwiML::Response.new do |r|
 			r.Message "Hand: #{@@hand} Score: #{@@score}"
 		end 
