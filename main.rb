@@ -88,5 +88,6 @@ end
 
 get '/mongoTest' do
 	db = get_connection
-	"db = #{db}"		
+	collections = db.collection_names
+	"collections = #{collections}"		
 end
