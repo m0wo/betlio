@@ -80,6 +80,7 @@ def updateDb(hand, score, user)
 	})
 end
 get '/' do
+	updateDb("testHand", "testScore", "testUser")
 	message = params[:Body]
 	if message == "DEAL"
 		buildDeck()
@@ -87,7 +88,7 @@ get '/' do
 		@@hand = Array.new	
 		deal(2)
 		checkScore()
-		updateDb(@@hand, @@score, params[:From])
+		updateDb("testHand", "testScore", "testUser")
 		twiml = Twilio::TwiML::Response.new do |r|
 			r.Message "Hand: #{@@hand} Score: #{@@score}"
 		end 
