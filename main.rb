@@ -88,5 +88,5 @@ end
 
 get '/mongoTest' do
 	db = get_connection
-	"#{db}"
+	"db = #{db}"		
 end
