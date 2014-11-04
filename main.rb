@@ -38,7 +38,7 @@ end
 
 #buildDeck()
 
-@@hand = Array.new
+#@@hand = Array.new
 
 def deal(numCards)
 	(1..numCards).each do |i|
@@ -50,7 +50,7 @@ end
 
 #deal(2)
 #puts @@hand
-@@score = 0
+#@@score = 0
 
 def checkScore()
 	@@hand.each do |i|
@@ -73,6 +73,8 @@ get '/' do
 	message = params[:Body]
 	if message == "DEAL"
 		buildDeck()
+		@@score = 0
+		@@hand = Array.new	
 		deal(2)
 		checkScore()
 		twiml = Twilio::TwiML::Response.new do |r|
