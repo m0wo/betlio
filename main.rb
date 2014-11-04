@@ -90,4 +90,7 @@ get '/mongoTest' do
 	db = get_connection
 	collections = db.collection_names
 	"collections = #{collections}"		
+	coll = db['test']
+
+	10.times{|i| coll.insert({ :count => i+1})}
 end
