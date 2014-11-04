@@ -91,5 +91,6 @@ get '/mongoTest' do
 	collections = db.collection_names
 	"collections = #{collections}"		
 	coll = db['test']
+	coll.insert({"name" => "test"})
 
 end
