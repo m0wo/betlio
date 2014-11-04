@@ -36,7 +36,7 @@ def buildDeck()
 	end	
 end	
 
-buildDeck()
+#buildDeck()
 
 @@hand = Array.new
 
@@ -48,8 +48,8 @@ def deal(numCards)
 	end
 end
 
-deal(2)
-puts @@hand
+#deal(2)
+#puts @@hand
 @@score = 0
 
 def checkScore()
@@ -65,11 +65,14 @@ def checkScore()
 			@@score = @@score + currentValue.to_i
 		end
 	end
-puts @@score
+#puts @@score
 end
-checkScore();
+#checkScore();
 
 get '/' do
+	buildDeck()
+	deal(2)
+	checkScore()
 	message = params[:Body]
 	if message == "DEAL"
 		deal(2)
