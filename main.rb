@@ -1,6 +1,8 @@
 require 'rubygems'
 require 'twilio-ruby'
 require 'sinatra'
+require 'mongo'
+require 'uri'
 
 @@deck = Array.new
 
@@ -36,10 +38,6 @@ def buildDeck()
 	end	
 end	
 
-#buildDeck()
-
-#@@hand = Array.new
-
 def deal(numCards)
 	(1..numCards).each do |i|
 		chosenCard = Random.rand(1..@@deck.length)
@@ -47,10 +45,6 @@ def deal(numCards)
 		@@deck.delete(chosenCard)
 	end
 end
-
-#deal(2)
-#puts @@hand
-#@@score = 0
 
 def checkScore()
 	@@hand.each do |i|
@@ -65,9 +59,16 @@ def checkScore()
 			@@score = @@score + currentValue.to_i
 		end
 	end
-#puts @@score
 end
-#checkScore();
+
+def get_connection
+	return @db_connection if @db_connection
+	db = URI.parse(ENV['MONGOHQ_URL'])
+	db_name = db.path.gsub(/^\//, '')
+	@db_connection = Mongo::Connection.new(db.host, db.port).db(db_name)
+	@db_connection.authenticate(db.user, db.password) unless (db.user.nil? || db.user.nil?)
+	@db_connection
+end
 
 get '/' do
 	message = params[:Body]
@@ -81,8 +82,10 @@ get '/' do
 			r.Message "Hand: #{@@hand} Score: #{@@score}"
 		end 
 	end
-#	twiml = Twilio::TwiML::Response.new do |r|
-#		r.Message "#{message} to you to."
-#	end
+
 	twiml.text
+end
+
+get '/mongoTest' do
+	db = get_connection
 end
