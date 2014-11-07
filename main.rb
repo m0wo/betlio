@@ -49,6 +49,6 @@ get '/mongoTest' do
 	collections = db.collection_names
 	"collections = #{collections}"		
 	coll = db['test']
-	coll.insert({"playerHand" => bj.playerHand})
+	coll.insert({"playerHand" => "hurr"})
 
 end
