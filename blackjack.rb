@@ -1,17 +1,28 @@
 class Blackjack
 
+def initialize(*args)
 
+	if args.size < 1
+		@@deck = Array.new
+		@@playerScore = 0
+		@@playerHand = Array.new
+		@@dealerHand = Array.new
+		buildDeck
+		deal(2, @@playerHand)
+		deal(1, @@dealerHand)
+		@@playerScore = checkScore(@@playerHand)
+	else
+		@@deck = args[0]
+		@@playerHand = args[1]
+		@@dealerHand = args[2]
 
-def initialize()
-	@@deck = Array.new
-	@@playerScore = 0
-	@@playerHand = Array.new
-	@@dealerHand = Array.new
-	buildDeck
-	deal(2, @@playerHand)
-	deal(1, @@dealerHand)
-	@@playerScore = checkScore(@@playerHand)
+		@@playerScore = checkScore(@@playerHand)
+		@@dealerScore = checkScore(@@dealerHand)
+	end
 end
+
+#ruby doesn't support multiple constructors...
+
 
 def deck
 	@@deck

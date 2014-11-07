@@ -14,33 +14,44 @@ def get_connection
 	@db_connection
 end
 
-def updateDb(hand, score, user)
+def updateDb(playerHand, dealerHand, user)
 	db = get_connection
 	coll = db['test']
 	coll.insert({
-		"hand" => hand,
-		"score" => score,
+		"playerHand" => hand,
+		"dealerHand" => dealerHand,
 		"user" => user
 	})
 end
+
+def newGame(user)
+	bj = Blackjack.new
+	bj.buildDeck
+	bj.deal(2, bj.playerHand)
+	bj.deal(1, bj.dealerHand)
+	updateDb(bj.playerHand, bj.dealerHand, user)
+
+
+	twiml = Twilio::TwiML::Response.new do |r|
+		r.Message "Hand: #{bj.playerHand} Score: #{bj.playerScore}"
+	end 
+
+	twiml.text
+end
+
+def hit
+
+end
+
 get '/' do
 	updateDb("testHand", "testScore", "testUser")
 	message = params[:Body]
 	user = params[:From]
 	
 	if message == "DEAL"
-		buildDeck()
-		@@score = 0
-		@@hand = Array.new	
-		deal(2)
-		checkScore()
-		updateDb(@@hand, @@score, user)
-		twiml = Twilio::TwiML::Response.new do |r|
-			r.Message "Hand: #{@@hand} Score: #{@@score}"
-		end 
+		newGame(user)
 	end
 
-	twiml.text
 end
 
 get '/mongoTest' do
@@ -50,5 +61,4 @@ get '/mongoTest' do
 	"collections = #{collections}"		
 	coll = db['test']
 	coll.insert({"playerHand" => bj.playerHand})
-
 end
