@@ -25,18 +25,12 @@ def updateDb(playerHand, dealerHand, user)
 end
 
 def newGame(user)
-	#bj = Blackjack.new
-	#bj.buildDeck
-	#bj.deal(2, bj.playerHand)
-	#bj.deal(1, bj.dealerHand)
-	#updateDb(bj.playerHand, bj.dealerHand, user)
+	@bj = Blackjack.new
+	@bj.buildDeck
+	@bj.deal(2, @bj.playerHand)
+	@bj.deal(1, @bj.dealerHand)
+	updateDb(@bj.playerHand, @bj.dealerHand, user)
 
-
-	twiml = Twilio::TwiML::Response.new do |r|
-		r.Message "Hand: #{bj.playerHand} Score: #{bj.playerScore}"
-	end 
-
-	twiml.text
 end
 
 def hit
@@ -50,6 +44,13 @@ get '/' do
 	
 	if message == "DEAL"
 		newGame(user)
+	
+
+		twiml = Twilio::TwiML::Response.new do |r|
+			r.Message "Hand: #{@bj.playerHand} Score: #{@bj.playerScore}"
+		end 
+
+		twiml.text
 	end
 
 end
