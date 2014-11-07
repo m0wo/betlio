@@ -13,6 +13,22 @@ def initialize()
 	@@playerScore = checkScore(@@playerHand)
 end
 
+def deck
+	@@deck
+end
+
+def playerScore
+	@@playerScore
+end
+
+def playerHand
+	@@playerHand
+end
+
+def dealerHand
+	@@dealerHand
+end
+
 def buildDeck()
 	cardName = ""
 	

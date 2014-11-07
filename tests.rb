@@ -1,5 +1,5 @@
 require_relative 'blackjack'
 
 bj = Blackjack.new
-
-bj.gameLoop
+puts bj.instance_variable_get(:@playerHand)
+#bj.gameLoop
