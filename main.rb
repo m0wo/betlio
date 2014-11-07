@@ -27,9 +27,8 @@ get '/' do
 	updateDb("testHand", "testScore", "testUser")
 	message = params[:Body]
 	user = params[:From]
-	if message == "START"
-		
-	elsif message == "DEAL"
+	
+	if message == "DEAL"
 		buildDeck()
 		@@score = 0
 		@@hand = Array.new	
