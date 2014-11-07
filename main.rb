@@ -3,7 +3,7 @@ require 'twilio-ruby'
 require 'sinatra'
 require 'mongo'
 require 'uri'
-require 'blackjack'
+require_relative 'blackjack'
 
 def get_connection
 	return @db_connection if @db_connection
