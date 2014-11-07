@@ -25,11 +25,11 @@ def updateDb(playerHand, dealerHand, user)
 end
 
 def newGame(user)
-	bj = Blackjack.new
-	bj.buildDeck
-	bj.deal(2, bj.playerHand)
-	bj.deal(1, bj.dealerHand)
-	updateDb(bj.playerHand, bj.dealerHand, user)
+	#bj = Blackjack.new
+	#bj.buildDeck
+	#bj.deal(2, bj.playerHand)
+	#bj.deal(1, bj.dealerHand)
+	#updateDb(bj.playerHand, bj.dealerHand, user)
 
 
 	twiml = Twilio::TwiML::Response.new do |r|
