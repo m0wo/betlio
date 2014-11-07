@@ -40,7 +40,6 @@ get '/' do
 	user = params[:From]
 	
 	if message == "DEAL"
-		newGame(user)
 		bj = Blackjack.new
 		bj.buildDeck
 		bj.deal(2, @bj.playerHand)
