@@ -28,7 +28,7 @@ def getGameState(user)
 	db = get_connection
 	coll = db['test']
 	user = coll.find({"user" => user})
-
+	puts user
 	return user
 	
 end
