@@ -57,7 +57,7 @@ get '/' do
 		newGame(user)
 		test = getGameState(user)
 		twiml = Twilio::TwiML::Response.new do |r|
-			r.Message test
+			r.Message test.playerHand
 		end 
 
 		twiml.text
