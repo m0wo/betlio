@@ -17,24 +17,29 @@ end
 def updateDb(playerHand, dealerHand, user)
 	db = get_connection
 	coll = db['test']
-	coll.insert({
+	coll.insert(
 		"playerHand" => playerHand,
 		"dealerHand" => dealerHand,
 		"user" => user
-	})
+	)
 end
 
 def getGameState(user)
 	db = get_connection
 	coll = db['test']
-	user = coll.find({"user" => user}).to_a
+	user = coll.find("user" => user).to_a
 	return user
 	
 end
 
-def newGame(user)
+def clearUser(user)
+	db = get_connection
+	coll = db['test']
+	coll.remove("user" => user)
 
-	updateDb(@bj.playerHand, @bj.dealerHand, user)
+end
+
+def newGame(user)
 
 end
 
@@ -61,9 +66,11 @@ get '/testing' do
 	#bj = Blackjack.new
 	#updateDb(bj.playerHand, bj.dealerHand, 00)
 	#"player hand: #{bj.playerHand}"
-	test = getGameState(0)
+	#test = getGameState(0)
 	
-	"test: #{test}"
+	#"test: #{test}"
+
+	clearUser(0)
 end
 
 get '/mongoTest' do
