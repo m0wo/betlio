@@ -35,7 +35,7 @@ end
 def clearUser(user)
 	db = get_connection
 	coll = db['test']
-	coll.remove("user" => 0)
+	coll.remove("user" => user.to_s)
 
 end
 
