@@ -24,6 +24,17 @@ def updateDb(playerHand, dealerHand, user)
 	})
 end
 
+def getGameState(user)
+	db = get_connection
+	coll = db['test']
+	user = coll.find({"user" => user})
+
+	if user
+		return user
+	end
+	
+end
+
 def newGame(user)
 
 	updateDb(@bj.playerHand, @bj.dealerHand, user)
@@ -35,7 +46,6 @@ def hit
 end
 
 get '/' do
-	updateDb("testHand", "testScore", "testUser")
 	message = params[:Body]
 	user = params[:From]
 	
@@ -51,9 +61,12 @@ get '/' do
 end
 
 get '/testing' do
-	bj = Blackjack.new
-	updateDb(bj.playerHand, bj.dealerHand, 00)
-	"player hand: #{bj.playerHand}"
+	#bj = Blackjack.new
+	#updateDb(bj.playerHand, bj.dealerHand, 00)
+	#"player hand: #{bj.playerHand}"
+	test = getGameState(0)
+	
+	"test: #{test}"
 end
 
 get '/mongoTest' do
