@@ -18,7 +18,7 @@ def updateDb(playerHand, dealerHand, user)
 	db = get_connection
 	coll = db['test']
 	coll.insert({
-		"playerHand" => hand,
+		"playerHand" => playerHand,
 		"dealerHand" => dealerHand,
 		"user" => user
 	})
