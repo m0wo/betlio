@@ -14,12 +14,13 @@ def get_connection
 	@db_connection
 end
 
-def updateDb(playerHand, dealerHand, user)
+def updateDb(playerHand, dealerHand, user, deck)
 	db = get_connection
 	coll = db['test']
 	coll.insert(
 		"playerHand" => playerHand,
 		"dealerHand" => dealerHand,
+		"deck" => deck,
 		"user" => user
 	)
 end
@@ -42,7 +43,7 @@ end
 def newGame(user)
 	clearUser(user)
 	bj = Blackjack.new
-	updateDb(bj.playerHand, bj.dealerHand, user)
+	updateDb(bj.playerHand, bj.dealerHand, bj.deck, user)
 end
 
 def hit
@@ -57,7 +58,7 @@ get '/' do
 		newGame(user)
 		test = getGameState(user)
 		twiml = Twilio::TwiML::Response.new do |r|
-			r.Message test[1]
+			r.Message test
 		end 
 
 		twiml.text
