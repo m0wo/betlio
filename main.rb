@@ -35,12 +35,14 @@ end
 def clearUser(user)
 	db = get_connection
 	coll = db['test']
-	coll.remove("user" => user.to_s)
+	coll.remove("user" => user)
 
 end
 
 def newGame(user)
-
+	clearUser(user)
+	bj = Blackjack.new
+	updateDb(bj.playerHand, bj.dealerHand, user)
 end
 
 def hit
@@ -52,25 +54,15 @@ get '/' do
 	user = params[:From]
 	
 	if message == "DEAL"
-		bj = Blackjack.new
+		newGame(user)
+		test = getGameState(user)
 		twiml = Twilio::TwiML::Response.new do |r|
-			r.Message "Hand: #{bj.playerHand} Score: #{bj.playerScore}"
+			r.Message test
 		end 
 
 		twiml.text
 	end
 
-end
-
-get '/testing' do
-	#bj = Blackjack.new
-	#updateDb(bj.playerHand, bj.dealerHand, 00)
-	#"player hand: #{bj.playerHand}"
-	#test = getGameState(0)
-	
-	#"test: #{test}"
-
-	clearUser(0)
 end
 
 get '/mongoTest' do
