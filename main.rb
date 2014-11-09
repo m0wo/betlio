@@ -14,7 +14,7 @@ def get_connection
 	@db_connection
 end
 
-def updateDb(playerHand, dealerHand, user, deck)
+def updateDb(playerHand, dealerHand, deck, user)
 	db = get_connection
 	coll = db['test']
 	coll.insert(
