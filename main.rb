@@ -51,8 +51,9 @@ get '/' do
 end
 
 get '/testing' do
-		bj = Blackjack.new
-		"player hand: #{bj.playerHand}"
+	bj = Blackjack.new
+	updateDb(bj.playerHand, bj.dealerHand, 00)
+	"player hand: #{bj.playerHand}"
 end
 
 get '/mongoTest' do
