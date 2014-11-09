@@ -57,8 +57,8 @@ end
 get '/testing' do
 	message = "DEAL"
 	if message == "DEAL"
-		bj = Blackjack.new
-		bj.buildDeck
+		bj = Blackjack.new()
+		bj.buildDeck()
 		#bj.deal(2, bj.playerHand)
 		#bj.deal(1, bj.dealerHand)
 		#"player hand: #{bj.playerHand}"
