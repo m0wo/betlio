@@ -41,10 +41,6 @@ get '/' do
 	
 	if message == "DEAL"
 		bj = Blackjack.new
-		bj.buildDeck
-		bj.deal(2, @bj.playerHand)
-		bj.deal(1, @bj.dealerHand)
-
 		twiml = Twilio::TwiML::Response.new do |r|
 			r.Message "Hand: #{bj.playerHand} Score: #{bj.playerScore}"
 		end 
@@ -55,15 +51,8 @@ get '/' do
 end
 
 get '/testing' do
-	message = "DEAL"
-	if message == "DEAL"
-		bj = Blackjack.new()
-		bj.buildDeck
-		#bj.deal(2, bj.playerHand)
-		#bj.deal(1, bj.dealerHand)
+		bj = Blackjack.new
 		"player hand: #{bj.playerHand}"
-	end
-
 end
 
 get '/mongoTest' do
