@@ -29,9 +29,7 @@ def getGameState(user)
 	coll = db['test']
 	user = coll.find({"user" => user})
 
-	if user
-		return user
-	end
+	return user
 	
 end
 
