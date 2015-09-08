@@ -97,7 +97,19 @@ def checkScore(hand)
 		if currentValue === "T" || currentValue === "J" || currentValue === "Q" || currentValue === "K"
 			score = score + 10
 		elsif currentValue === "A"
-			score = score + 11
+			var validAce = false
+			while (!validAce) do
+				puts "1 or 11?"
+				if gets.chomp === 11
+                			score = score + 11
+                			validAce = true
+                		else if gets.chomp === 1
+                			score = score + 1
+                			validAce = true
+        		 	else
+                			puts "That wasn't right. Try again."
+                		end
+                	end
 		else
 			score = score + currentValue.to_i
 		end
